@@ -45,8 +45,7 @@ public class _ArrayList<T> implements _ArrayListInterface<T> {
             newList[index] =this.elements[index];
     }
 
-    @Override
-    public void grow() {
+    private void grow() {
         Object[] newList = new Object[elements.length  + growFactor];
         copyElements(newList);
         this.elements = newList;
@@ -128,12 +127,42 @@ public class _ArrayList<T> implements _ArrayListInterface<T> {
 
     @Override
     public boolean remove(T value) {
-        return false;
+        int indexToRemove = this.indexOf(value);
+
+        if(indexToRemove == -1) return false;
+
+        else this.removeAtIndex(indexToRemove);
+        return true;
+    }
+
+
+    @Override
+    public boolean removeLast(T value) {
+        int indexToRemove = this.lastIndexOf(value);
+
+        if(indexToRemove == -1) return false;
+
+        else this.removeAtIndex(indexToRemove);
+        return true;
+    }
+
+    @Override
+    public boolean removeAtIndex(int index){
+        if(index > this.currentLastElementPointer) throw new IndexOutOfBoundsException();
+
+        for(int i=index; i<this.currentLastElementPointer-1; i++){
+            this.elements[i] = this.elements[i+1];
+        }
+        this.currentLastElementPointer--;
+        return true;
     }
 
     @Override
     public boolean removeAll(Collection<? extends T> values) {
-        return false;
+        for(T val:values){
+            this.remove(val);
+        }
+        return true;
     }
 
     @Override
@@ -142,8 +171,14 @@ public class _ArrayList<T> implements _ArrayListInterface<T> {
     }
 
     @Override
-    public boolean equals(List<T> other) {
-        return false;
+    public boolean equals(_ArrayList<T> other) {
+
+        if(other.size() != this.size()) return false;
+
+        for(int i=0; i<this.currentLastElementPointer; i++){
+            if(this.elements[i] != other.get(i)) return false;
+        }
+        return true;
     }
 
     @Override
