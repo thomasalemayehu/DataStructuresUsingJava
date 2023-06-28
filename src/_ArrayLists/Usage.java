@@ -1,9 +1,8 @@
-import _ArrayLists._ArrayList;
+package _ArrayLists;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Main {
+public class Usage {
     public static void main(String[] args) {
 
         _ArrayList<Integer> values = new _ArrayList<>();

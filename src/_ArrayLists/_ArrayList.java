@@ -1,11 +1,10 @@
 package _ArrayLists;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class _ArrayList<T> implements _ArrayListInterface<T> {
     private Object[] elements;
+
 
     private int currentLastElementPointer;
 
